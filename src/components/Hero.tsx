@@ -290,20 +290,21 @@ export const Hero: React.FC<HeroProps> = ({ isDark: _isDark }) => {
           color: '#D4B16A', marginBottom: '20px',
         }}>My Design</p>
 
-        {/* Main headline — responsive sizing */}
+        {/* Main headline — 4 words allow proper mobile stacking */}
         <h1
           ref={headlineRef}
+          className="hero-headline"
           style={{
             fontFamily: 'var(--font-serif)', fontWeight: 300,
-            fontSize: 'clamp(2.0rem, 5.5vw, 6.2rem)', // Scaled fluidly between 320px and 1920px
-            lineHeight: 1.1, color: '#F7F5F2',
+            fontSize: 'clamp(2.0rem, 5.5vw, 6.2rem)',
+            lineHeight: 1.05, color: '#F7F5F2',
             letterSpacing: '-1px', marginBottom: '24px',
             overflow: 'hidden',
           }}
         >
-          {['SPACES THAT', 'INSPIRE LIFE'].map((line, i) => (
-            <span key={i} style={{ display: 'block', overflow: 'hidden' }}>
-              <span className="word" style={{ display: 'inline-block' }}>{line}</span>
+          {['SPACES', 'THAT', 'INSPIRE', 'LIFE'].map((word, i) => (
+            <span key={i} className="hero-word-line" style={{ display: 'block', overflow: 'hidden' }}>
+              <span className="word" style={{ display: 'inline-block' }}>{word}</span>
             </span>
           ))}
         </h1>
@@ -311,6 +312,7 @@ export const Hero: React.FC<HeroProps> = ({ isDark: _isDark }) => {
         {/* Description */}
         <p
           ref={subRef}
+          className="hero-description"
           style={{
             fontFamily: 'var(--font-sans)', fontSize: 'clamp(13px, 1.2vw, 15px)', lineHeight: 1.7,
             color: 'rgba(247,245,242,0.6)', maxWidth: '420px',
@@ -321,15 +323,15 @@ export const Hero: React.FC<HeroProps> = ({ isDark: _isDark }) => {
         </p>
 
         {/* CTAs */}
-        <div ref={ctaRef} style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap', opacity: 0 }}>
+        <div ref={ctaRef} className="hero-cta-wrap" style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap', opacity: 0 }}>
           <button
-            className="btn-gold"
+            className="btn-gold hero-cta-btn"
             data-cursor="explore"
             onClick={scrollToAbout}
             style={{ 
               position: 'relative', 
               zIndex: 1,
-              minHeight: '48px', // touch-friendly target size
+              minHeight: '48px',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -379,11 +381,79 @@ export const Hero: React.FC<HeroProps> = ({ isDark: _isDark }) => {
           70% { opacity: 0.8; transform: scale(0.95); }
           100% { opacity: 0.95; transform: scale(1.04); }
         }
+
+        /* ── Tablet (<=1024px): hide desktop-only decorations ── */
         @media (max-width: 1024px) {
           .social-sidebar-desktop { display: none !important; }
           .slide-index-desktop { display: none !important; }
           .scroll-hint-container { display: none !important; }
-          .hero-content-container { text-align: center; margin: 0 auto; display: flex; flexDirection: column; alignItems: center; }
+        }
+
+        /* ── Mobile (<=768px): full vertical stack hero layout ── */
+        @media (max-width: 768px) {
+          .hero-content-container {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: flex-start !important;
+            gap: 0 !important;
+            padding-left: 24px !important;
+            padding-right: 24px !important;
+            padding-top: 120px !important;
+            padding-bottom: 80px !important;
+            margin-top: 0 !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            text-align: left !important;
+          }
+
+          /* Headline: each word on its own line, no overflow */
+          .hero-headline {
+            font-size: clamp(3rem, 10vw, 5rem) !important;
+            letter-spacing: -0.5px !important;
+            line-height: 1.0 !important;
+            margin-bottom: 20px !important;
+            width: 100% !important;
+            overflow: visible !important;
+          }
+          .hero-word-line {
+            overflow: visible !important;
+            display: block !important;
+          }
+
+          /* Description: full width, below headline */
+          .hero-description {
+            font-size: 14px !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            margin-bottom: 28px !important;
+            line-height: 1.65 !important;
+          }
+
+          /* CTA: left-aligned, constrained width */
+          .hero-cta-wrap {
+            width: 100% !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .hero-cta-btn {
+            width: fit-content !important;
+            max-width: 220px !important;
+          }
+        }
+
+        /* ── Small Mobile (<=480px) ── */
+        @media (max-width: 480px) {
+          .hero-headline {
+            font-size: clamp(2.6rem, 11vw, 4rem) !important;
+          }
+          .hero-content-container {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+            padding-top: 100px !important;
+          }
         }
       `}</style>
     </section>
