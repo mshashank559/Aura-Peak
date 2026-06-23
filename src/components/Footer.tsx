@@ -14,6 +14,7 @@ const SOCIAL_LINKS = [
 ];
 
 const CONTACT_DISPLAY_EMAIL = import.meta.env.VITE_CONTACT_DISPLAY_EMAIL || 'info@aurapeakwoodcraft.com';
+const CONTACT_PHONE = import.meta.env.VITE_CONTACT_PHONE || '+44 7776 848898';
 
 interface FooterProps {
   isDark: boolean;
@@ -91,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({ isDark }) => {
         <div className="footer-contact-bar">
           {[
             { icon: '✉', label: 'Email', value: CONTACT_DISPLAY_EMAIL },
-            { icon: '☎', label: 'Phone', value: '+1 (234) 567-890' },
+            { icon: '☎', label: 'Phone', value: CONTACT_PHONE },
             { icon: '◎', label: 'Location', value: 'New York, USA' },
           ].map(c => (
             <div key={c.label} style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
