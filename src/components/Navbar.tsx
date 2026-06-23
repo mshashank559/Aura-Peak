@@ -57,13 +57,22 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.style.height = '100%';
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.height = '100%';
       (window as any).lenis?.stop();
     } else {
       document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
       (window as any).lenis?.start();
     }
     return () => {
       document.body.style.overflow = '';
+      document.body.style.height = '';
+      document.documentElement.style.overflow = '';
+      document.documentElement.style.height = '';
       (window as any).lenis?.start();
     };
   }, [menuOpen]);
@@ -112,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
       <a 
         href="#home" 
         onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} 
-        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', zIndex: 1001 }}
+        style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', zIndex: menuOpen ? 1100 : 1001 }}
       >
         <img
           src={isDark || menuOpen
@@ -156,7 +165,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
       </ul>
 
       {/* Right Side Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px', zIndex: 1001 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '20px', zIndex: menuOpen ? 1100 : 1001 }}>
         {/* Theme Toggle - Hidden when mobile menu is open */}
         <button
           onClick={onToggleTheme}
@@ -231,7 +240,10 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
         data-lenis-prevent
         style={{
           position: 'fixed',
-          inset: 0,
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100dvh',
           background: '#050505',
           display: 'flex',
           flexDirection: 'column',
@@ -243,7 +255,8 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
           visibility: menuOpen ? 'visible' : 'hidden',
           transform: menuOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -20px, 0)',
           overflowY: 'auto',
-          maxHeight: '100vh',
+          maxHeight: '100dvh',
+          overscrollBehavior: 'contain',
         }}
       >
         {/* Menu Links */}
