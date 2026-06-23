@@ -13,6 +13,8 @@ const SERVICES = [
   'Other',
 ];
 
+const CONTACT_DISPLAY_EMAIL = import.meta.env.VITE_CONTACT_DISPLAY_EMAIL || 'info@aurapeakwoodcraft.com';
+
 interface FormState {
   name: string;
   email: string;
@@ -201,7 +203,7 @@ export const Contact: React.FC = () => {
               <span className="detail-icon">✉</span>
               <div>
                 <p className="detail-title">Email Us</p>
-                <a href="mailto:info@aurapeakwoodcraft.com" className="detail-value">info@aurapeakwoodcraft.com</a>
+                <a href={`mailto:${CONTACT_DISPLAY_EMAIL}`} className="detail-value">{CONTACT_DISPLAY_EMAIL}</a>
               </div>
             </div>
             <div className="detail-item">

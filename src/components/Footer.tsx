@@ -13,6 +13,8 @@ const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: '#' },
 ];
 
+const CONTACT_DISPLAY_EMAIL = import.meta.env.VITE_CONTACT_DISPLAY_EMAIL || 'info@aurapeakwoodcraft.com';
+
 interface FooterProps {
   isDark: boolean;
 }
@@ -69,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ isDark }) => {
 
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '60px' }}>
           <a
-            href="mailto:hello@aurapeak.com"
+            href={`mailto:${CONTACT_DISPLAY_EMAIL}`}
             className="btn-gold"
             data-cursor="open"
             style={{
@@ -88,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({ isDark }) => {
         {/* Contact info bar */}
         <div className="footer-contact-bar">
           {[
-            { icon: '✉', label: 'Email', value: 'hello@aurapaakwoodcraft.com' },
+            { icon: '✉', label: 'Email', value: CONTACT_DISPLAY_EMAIL },
             { icon: '☎', label: 'Phone', value: '+1 (234) 567-890' },
             { icon: '◎', label: 'Location', value: 'New York, USA' },
           ].map(c => (
