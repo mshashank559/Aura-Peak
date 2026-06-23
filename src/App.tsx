@@ -12,6 +12,7 @@ import { Services } from './components/Services';
 import { Projects } from './components/Projects';
 import { Process } from './components/Process';
 import { Footer } from './components/Footer';
+import { Contact } from './components/Contact';
 
 import './index.css';
 import './App.css';
@@ -33,6 +34,7 @@ export default function App() {
       smoothWheel: true,
     });
     lenisRef.current = lenis;
+    (window as any).lenis = lenis;
 
     // Connect Lenis to GSAP's ticker
     gsap.ticker.add((time) => {
@@ -45,6 +47,7 @@ export default function App() {
 
     return () => {
       lenis.destroy();
+      (window as any).lenis = null;
       gsap.ticker.remove(lenis.raf);
     };
   }, [preloaderDone]);
@@ -136,6 +139,8 @@ export default function App() {
         <div id="ap-navbar" style={{
           opacity: 0,
           transition: 'opacity 0.8s ease',
+          position: 'relative',
+          zIndex: 1000,
         }}>
           <Navbar isDark={isDark} onToggleTheme={() => setIsDark(d => !d)} />
         </div>
@@ -147,6 +152,7 @@ export default function App() {
           <Services />
           <Projects />
           <Process />
+          <Contact />
           <Footer isDark={isDark} />
         </main>
       </div>

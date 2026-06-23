@@ -57,11 +57,14 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
   useEffect(() => {
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
+      (window as any).lenis?.stop();
     } else {
       document.body.style.overflow = '';
+      (window as any).lenis?.start();
     }
     return () => {
       document.body.style.overflow = '';
+      (window as any).lenis?.start();
     };
   }, [menuOpen]);
 
@@ -224,20 +227,25 @@ export const Navbar: React.FC<NavbarProps> = ({ isDark, onToggleTheme }) => {
       </div>
 
       {/* Luxury Full-Screen Mobile Menu Overlay */}
-      <div style={{
-        position: 'fixed',
-        inset: 0,
-        background: '#050505',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: '120px 10% 60px',
-        zIndex: 999,
-        transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-        opacity: menuOpen ? 1 : 0,
-        visibility: menuOpen ? 'visible' : 'hidden',
-        transform: menuOpen ? 'translateY(0)' : 'translateY(-20px)',
-      }}>
+      <div 
+        data-lenis-prevent
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: '#050505',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '120px 10% 60px',
+          zIndex: 1050,
+          transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+          opacity: menuOpen ? 1 : 0,
+          visibility: menuOpen ? 'visible' : 'hidden',
+          transform: menuOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -20px, 0)',
+          overflowY: 'auto',
+          maxHeight: '100vh',
+        }}
+      >
         {/* Menu Links */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
           {NAV_LINKS.map((link, index) => (
