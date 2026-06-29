@@ -83,7 +83,7 @@ Submitted At: ${new Date().toLocaleString()}`;
                       'Authorization': `Bearer ${apiKey}`,
                     },
                     body: JSON.stringify({
-                      from: 'AuraPeak Inquiry <onboarding@resend.dev>',
+                      from: 'AuraPeak Inquiry <inquiry@aurapeakwoodcraft.com>',
                       to: receiver,
                       subject: 'New Website Inquiry - AuraPeak Woodcraft',
                       text: emailBody,
