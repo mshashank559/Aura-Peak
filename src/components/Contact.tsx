@@ -580,7 +580,7 @@ export const Contact: React.FC = () => {
         .submit-btn {
           cursor: pointer;
           font-weight: 500;
-          transition: all 0.3s;
+          transition: color 0.3s, border-color 0.3s, background-color 0.3s;
         }
 
         .submit-btn:disabled {
